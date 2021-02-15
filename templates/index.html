@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <!-- Own css -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <form action="/addTodo/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Type your todo here..." autocomplete="off" required>
+            <div class="btn">
+                <button type="submit">Add Todo</button>
+                <div class="effect"></div>
+            </div>
+        </form>
+        {% if todos %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Completed</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todos %}
+                        <tr>
+                            <td>{{todo.id}}</td>
+                            <td>
+                                {% if todo.completed %}
+                                    <i><del>{{todo.title}}</del></i>
+                                {% else %}
+                                    {{todo.title}}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if todo.completed %}
+                                    completed
+                                {% else %}
+                                    uncompleted
+                                {% endif %}
+                            </td>
+                            <td><a href="/update/{{todo.id}}">Update</a></td>
+                            <td><a href="/delete/{{todo.id}}">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert-message">
+                You didn't have  any Todo
+            </div>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
