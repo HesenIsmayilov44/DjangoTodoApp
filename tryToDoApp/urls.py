@@ -17,10 +17,16 @@ from django.contrib import admin
 from django.urls import path
 from todo import views
 
+from django.views.static import serve
+from django.conf.urls import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('addTodo/', views.addTodo),
     path('update/<int:id>', views.update),
     path('delete/<int:id>', views.delete),
+
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':  settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
