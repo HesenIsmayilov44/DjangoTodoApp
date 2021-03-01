@@ -25,7 +25,7 @@ SECRET_KEY = 'ov(c+&zg7ef8+l=+9vt48=%u-h=_do7a%!x&@gjltl25ksx%!v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','hasan-todoapp.herokuapp.com']
 
 
 # Application definition
